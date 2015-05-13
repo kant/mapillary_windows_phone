@@ -1,2 +1,4 @@
-# mapillary_windows_phone
+# Mapillary for Windows Phone
+
 The Mapillary Windows Phone app
+
