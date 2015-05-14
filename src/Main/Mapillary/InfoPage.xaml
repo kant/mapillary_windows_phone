@@ -1,0 +1,61 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Mapillary.InfoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="#242528">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="MAPILLARY" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="Details" Foreground="#eeeeee" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+        <TextBlock x:Name="version" Foreground="#eeeeee" FontSize="16" FontFamily="Arial" Margin="0,19,20,0" HorizontalAlignment="Right" Text="Version" Style="{StaticResource PhoneTextNormalStyle}"/>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">
+                <StackPanel>
+                    <TextBlock Text="Mapillary is a service for sharing photos for mapping." TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock Margin="12,12" Text="Use of this app and the Mapillary services are subject to the terms &amp; conditions below." TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock Margin="12,12" Text="© Mapillary AB" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <HyperlinkButton x:Name="About" Margin="12,12" Foreground="#eeeeee" Content="About" HorizontalAlignment="Left" Tap="About_Tap"/>
+                    <HyperlinkButton x:Name="Terms" Margin="12,12" Foreground="#eeeeee" Content="Terms" HorizontalAlignment="Left" Tap="Terms_Tap"/>
+                    <HyperlinkButton x:Name="signOut" Margin="12,12" Foreground="#eeeeee" Content="Sign out" HorizontalAlignment="Left" Tap="signOut_Tap"/>
+                    <HyperlinkButton Margin="12,12" Foreground="#eeeeee" Content="Show tutorial" HorizontalAlignment="Left" Tap="ShowTutorial_Tap"/>
+                    <TextBlock Text="Developer info" FontSize="25" Margin="12,10" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock Text="Developed by Ovesen.net, Bodø" Margin="12,5" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock Text="https://www.facebook.com/ovesen.net" Margin="12,5" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock Text="Mapillary for Windows Phone is developed in cooperation with Mapillary AB, but it is not an official product of Mapillary AB." Margin="12,5" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock Text="Please like Ovesen.net on Facebook to provide feedback and suggestions on the Mapillary for Windows Phone app." Margin="12,5" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
+
+                    <TextBlock Foreground="#eeeeee" Margin="0,10,0,10" FontSize="18" TextWrapping="Wrap" Text="Other Apps from Ovesen.net" />
+                    <HyperlinkButton Margin="5" Foreground="LightBlue" Tag="PhotoTxtW" HorizontalAlignment="Left" FontSize="18" Content="PhotoTxt Weather" Tap="HyperlinkButton_Tap" />
+                    <HyperlinkButton Margin="5" Foreground="LightBlue" Tag="PhotoTxtC" HorizontalAlignment="Left" FontSize="18" Content="PhotoTxt Christmas" Tap="HyperlinkButton_Tap" />
+                    <HyperlinkButton Margin="5" Foreground="LightBlue" Tag="PhotoTxtM" HorizontalAlignment="Left" FontSize="18" Content="My Big Day Photos" Tap="HyperlinkButton_Tap" />
+                    <HyperlinkButton Margin="5" Foreground="LightBlue" Tag="Nutrition" HorizontalAlignment="Left" FontSize="18" Content="Nutrition" Tap="HyperlinkButton_Tap" />
+                    <HyperlinkButton Margin="5" Foreground="LightBlue" Tag="HealthC" HorizontalAlignment="Left" FontSize="18" Content="Health Calculators" Tap="HyperlinkButton_Tap" />
+                    <HyperlinkButton Margin="5" Foreground="LightBlue" Tag="Drive" HorizontalAlignment="Left" FontSize="18" Content="Drive" Tap="HyperlinkButton_Tap" />
+                    <HyperlinkButton Margin="5" Foreground="LightBlue" Tag="SpeedCam" HorizontalAlignment="Left" FontSize="18" Content="SpeedCam Detector" Tap="HyperlinkButton_Tap" />
+                </StackPanel>
+
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>
