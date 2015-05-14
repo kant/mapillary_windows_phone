@@ -1,0 +1,46 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Mapillary.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="#34AD6B">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="MAPILLARY" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="Sign in" Foreground="#eeeeee" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <Button Content="TestUser" x:Name="TestUserBtn" Margin="0,0" Height="75" VerticalAlignment="Top" Width="140" Click="TestUserBtn_Click"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel>
+                <TextBlock Margin="12,2,12,2" Text="E-Mail address" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <TextBox x:Name="email" Background="#dddddd" InputScope="EmailUserName" KeyUp="email_KeyUp" MaxLength="400" Style="{StaticResource TextBoxStyle1}"/>
+                <TextBlock Margin="12,12,12,2" Text="Password" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <PasswordBox x:Name="password" Background="#dddddd" MaxLength="400" KeyUp="password_KeyUp" Style="{StaticResource PasswordBoxStyle1}" />
+                <Button Content="Log in" x:Name="loginButton" Width="460" HorizontalAlignment="Center" Foreground="#eeeeee" Background="#242528" Click="loginButton_Click"/>
+                <Grid>
+                    <HyperlinkButton x:Name="createAccountButton" Margin="0,18,20,20" Foreground="#eeeeee" Content="Sign up" HorizontalAlignment="Left" Tap="createAccountButton_Click"/>
+                    <HyperlinkButton x:Name="passwordResetLink" Margin="0,18,0,20" HorizontalAlignment="Right" Foreground="#eeeeee" Content="Forgot password"  Tap="passwordResetLink_Tap"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

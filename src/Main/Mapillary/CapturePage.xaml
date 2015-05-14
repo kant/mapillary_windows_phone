@@ -1,0 +1,104 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Mapillary.CapturePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Landscape"  Orientation="LandscapeLeft"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="#242528">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="640"/>
+            <ColumnDefinition Width="120"/>
+        </Grid.ColumnDefinitions>
+        <Canvas x:Name="camCanvas" Margin="0,0" HorizontalAlignment="Left"  Width="640" Height="480">
+            <Canvas.Background>
+                <SolidColorBrush Color="#bbbbbb"/>
+            </Canvas.Background>
+            <Canvas.Resources>
+            </Canvas.Resources>
+            <Rectangle Stroke="White" StrokeThickness="1.5" Canvas.Left="280" Canvas.Top="215" Height="50" Width="80"/>
+            <Line Stroke="White" StrokeThickness="1.5" X1="40" X2="600" Y1="180" Y2="180"/>
+            <Line Stroke="White" StrokeThickness="1.5" X1="40" X2="600" Y1="240" Y2="240"/>
+            <Line Stroke="White" StrokeThickness="1.5" X1="40" X2="600" Y1="300" Y2="300"/>
+        </Canvas>
+        <Border Width="650" Height="480" Opacity="0.6">
+            <Border.Background>
+                <SolidColorBrush x:Name="flashBorder" Color="Transparent"/>
+            </Border.Background>
+        </Border>
+        <TextBlock x:Name="currentPosText" FontSize="13" Visibility="Collapsed" Foreground="White" Text="Current pos: "/>
+         <Canvas  Margin="15,15" Background="Transparent" Height="40" Width="40" x:Name="gpsIndicator" VerticalAlignment="Bottom" HorizontalAlignment="Left" >
+            <Path x:Name="Path" Width="42.9066" Height="15.4073" Canvas.Left="3.63953" Canvas.Top="0" Stretch="Fill" StrokeThickness="3" StrokeLineJoin="Round" Stroke="#FF81C400" Data="F1 M 5.13953,13.9073C 8.77902,6.55521 16.3576,1.5 25.117,1.5C 33.8378,1.5 41.3882,6.51074 45.0461,13.8104"/>
+            <Path x:Name="Path_0" Width="29.7299" Height="11.3106" Canvas.Left="10.2278" Canvas.Top="7.7933" Stretch="Fill" StrokeThickness="3" StrokeLineJoin="Round" Stroke="#FF81C400" Data="F1 M 11.7278,17.6039C 14.1656,12.6794 19.2419,9.2933 25.109,9.2933C 30.9503,9.2933 36.0075,12.6496 38.4577,17.5389"/>
+            <Path x:Name="Path_1" Width="15.593" Height="6.91528" Canvas.Left="17.2962" Canvas.Top="15.4109" Stretch="Fill" StrokeThickness="3" StrokeLineJoin="Round" Stroke="#FF81C400" Data="F1 M 18.7962,20.8262C 19.9447,18.5062 22.3362,16.9109 25.1003,16.9109C 27.8522,16.9109 30.2348,18.4922 31.3892,20.7956"/>
+        </Canvas>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Foreground="#eeeeee" HorizontalAlignment="Left" x:Name="accuracyText" VerticalAlignment="Bottom" FontSize="20" Margin="80,0,0,30" Text=""/>
+            <TextBlock Foreground="#eeeeee" HorizontalAlignment="Left" x:Name="compassText" VerticalAlignment="Bottom" FontSize="20" Margin="12,0,0,30" Text=""/>
+        </StackPanel>
+        <Border x:Name="messageBorder" Margin="0,0,90,400" Opacity="0.6" Width="540" Height="44" Background="Black" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Border.Resources>
+                <Storyboard x:Name="messageFaderSb">
+                    <DoubleAnimation From="0.6" To="0"  Duration="00:00:4" Storyboard.TargetName="messageBorder" Storyboard.TargetProperty="Opacity">
+                        <DoubleAnimation.EasingFunction>
+                            <ExponentialEase Exponent="12" EasingMode="EaseIn"/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                </Storyboard>
+            </Border.Resources>
+            <Border.RenderTransform>
+                <!--
+                 Margin="-310,-25"
+                <RotateTransform CenterX="0" CenterY="0" Angle="-90" />-->
+                <RotateTransform CenterX="0" x:Name="messageAngle" CenterY="0" Angle="0" />
+            </Border.RenderTransform>
+            <TextBlock Foreground="White" x:Name="messageText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Text="Message">
+            </TextBlock>
+        </Border>
+        <Border x:Name="landscapeMessageBorder" Opacity="0.6" Width="440" Height="44" Background="Black" HorizontalAlignment="Right" Margin="-360,-25" VerticalAlignment="Bottom">
+            <Border.RenderTransform>
+                <RotateTransform CenterX="0" CenterY="0" Angle="-90" />
+            </Border.RenderTransform>
+            <TextBlock Foreground="#eeeeee" x:Name="landscapeMessageText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Text="Please use landscape mode">
+            </TextBlock>
+        </Border>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" >
+            <c4f:RoundButton x:Name="addButton" Margin="15,20" Foreground="White" BorderBrush="White" ButtonHeight="100" ButtonWidth="100" Click="newSequenceButton_Click" ImageSource="/Assets/appbar.add.png"/>
+            <c4f:RoundButton x:Name="cameraButton" Background="#66ff0000" Margin="15,20" Foreground="White" BorderBrush="White" ButtonHeight="100" ButtonWidth="100" Click="cameraButton_Click" ImageSource="/Assets/appbar.camera.png"/>
+            <c4f:RoundButton x:Name="modeButton" Margin="15,20" Foreground="White" BorderBrush="White" ButtonHeight="100" ButtonWidth="100" Click="modeButton_Click" ImageSource="/Assets/appbar.image.landscape.png"/>
+            <Popup x:Name="modePopup" HorizontalOffset="-350" VerticalOffset="-220">
+                <Popup.RenderTransform>
+                    <RotateTransform x:Name="modePopupTransform" CenterX="-185" CenterY="-185" Angle="-90" />
+                </Popup.RenderTransform>
+                <Border Width="350" Height="220" Background="#242528">
+                    <StackPanel Margin="10,3">
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="singleModeButton" Margin="0" Height="70" Width="70" Source="/Assets/appbar.man.walk.png" Tap="singleModeButton_Tap"/>
+                            <TextBlock Foreground="#eeeeee" Margin="4,14"  FontSize="22" Text="Take pictures (walking)" Tap="singleModeButton_Tap"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="sequenceModeButton" Margin="0" Height="70" Width="70" Source="/Assets/appbar.transit.car.png" Tap="sequenceModeButton_Tap"/>
+                            <TextBlock Foreground="#eeeeee" Margin="4,14"  FontSize="22" Text="Take pictures (riding)" Tap="sequenceModeButton_Tap"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="panoramaModeButton" Margin="0" Height="70" Width="70" Source="/Assets/appbar.image.landscape.png" Tap="panoramaModeButton_Tap"/>
+                            <TextBlock Foreground="#eeeeee" Margin="4,14"  FontSize="22" Text="Take panorama" Tap="panoramaModeButton_Tap"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </StackPanel>
+    </Grid>
+
+</phone:PhoneApplicationPage>

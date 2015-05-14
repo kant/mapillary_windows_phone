@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Mapillary.Header"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Background="#242528"
+    d:DesignHeight="55" d:DesignWidth="480">
+
+    <Grid x:Name="LayoutRoot" Background="#242528">
+        <Image Margin="5,8,0,0" Tap="Image_Tap" Height="40" HorizontalAlignment="Left" Source="/Assets/mapillary_logo_white.png"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,95 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Mapillary.UserProfile"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    xmlns:local="clr-namespace:Mapillary"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="#333333"
+    Background="#242528"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <local:Header Height="55" Margin="0"/>
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,5,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="12,0"  Height="100" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="profileImg" HorizontalAlignment="Left" Height="90" Width="90" Source="/Assets/silhouette.png"/>
+                <StackPanel Margin="10,0" Grid.Column="1">
+                    <TextBlock x:Name="emailAddress" FontWeight="Bold" Text="user@email.address.is.veryvererverylong.com"/>
+                    <TextBlock x:Name="aboutTxt" FontStyle="Italic" FontSize="16" TextWrapping="Wrap" Width="340" HorizontalAlignment="Left" TextTrimming="WordEllipsis" Text="Some sdfjllksdf sdflsdjflskdfjslkdfj sdj sdksdkfksdfj sdfkjsdk fsdfjksdfj sdkfsd fskdfjskdfjskdf sdfkjskd fsskdfjksdfjskdfjskdfjsdf"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="12,8" Height="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Margin="0,0,5,0" Grid.Column="0" Background="#dddddd"/>
+                <Border Margin="0,0,5,0" Grid.Column="1" Background="#dddddd"/>
+                <Border Margin="0,0,0,0" Grid.Column="2" Background="#dddddd"/>
+                <TextBlock x:Name="numPhotos" Grid.Column="0" Margin="0,0" FontSize="23" HorizontalAlignment="Center" VerticalAlignment="Top" Text="0"/>
+                <TextBlock x:Name="numMeters" Grid.Column="1" Margin="0,0" FontSize="23" HorizontalAlignment="Center" VerticalAlignment="Top" Text="0"/>
+                <TextBlock x:Name="numConnections" Grid.Column="2" Margin="0,0" FontSize="23" HorizontalAlignment="Center" VerticalAlignment="Top" Text="0"/>
+                <TextBlock Grid.Column="0" Margin="0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="photos"/>
+                <TextBlock Grid.Column="1" Margin="0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="meters"/>
+                <TextBlock Grid.Column="2" Margin="0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="connections"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="29"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border Background="#222222"></Border>
+                <TextBlock Margin="12,0" Foreground="White" Text="Recent sequences"/>
+                <ListBox x:Name="sequenceList" Margin="12,5" Grid.Row="1" Height="450">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Tap="Grid_Tap">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="0,2" Width="80" Height="60" Source="{Binding Image}"/>
+                                <StackPanel Margin="8,0,0,0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <TextBlock FontSize="18" Text="{Binding Place}" Foreground="#333333"/>
+                                    <TextBlock FontSize="18" Text="{Binding Date}" Foreground="#333333"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" Mode="Default"  ForegroundColor="White" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="infoButton" IconUri="/Assets/appbar.settings.png"  Text="Settings" Click="infoButton_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>
