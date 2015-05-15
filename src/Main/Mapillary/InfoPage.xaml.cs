@@ -42,11 +42,12 @@ namespace Mapillary
                 MessageBox.Show("You are now successfully signed out.", "Signed out", MessageBoxButton.OK);
                 SetSignInOutText();
             }
-            else
-            {
-                NavigationService.Navigate(new Uri("/LoginPage.xaml?op=signout", UriKind.Relative));
-            }
 
+            NavigationService.Navigate(new Uri("/LoginPage.xaml?op=signout", UriKind.Relative));
+            while (this.NavigationService.BackStack.Any())
+            {
+                this.NavigationService.RemoveBackEntry();
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
