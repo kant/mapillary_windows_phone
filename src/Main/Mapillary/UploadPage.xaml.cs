@@ -223,12 +223,12 @@ namespace Mapillary
         {
             try
             {
-                //var wasLoggedIn = await LoginService.RefreshTokens();
-                //if (!wasLoggedIn)
-                //{
-                //    MessageBox.Show("To upload photos, you need an upload token from the Mapillary service. Please retry later.", "Unable to get upload token", MessageBoxButton.OK);
-                //    return;
-                //}
+                var wasLoggedIn = await LoginService.RefreshTokens();
+                if (!wasLoggedIn)
+                {
+                    MessageBox.Show("To upload photos, you need an upload token from the Mapillary service. Please retry login.", "Unable to get upload token", MessageBoxButton.OK);
+                    return;
+                }
 
                 m_uploadQueue = new Queue<Photo>();
                 uploadMsg.Visibility = Visibility.Collapsed;

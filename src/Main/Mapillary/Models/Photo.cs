@@ -13,7 +13,7 @@ namespace Mapillary.Models
     public class Photo : INotifyPropertyChanged
     {
         private string m_title;
-        private Uri m_imageSource;
+        private BitmapImage m_imageSource;
         private DateTime m_timeStamp;
         private StorageFile m_file;
         private StorageFile m_thumbfile;
@@ -21,7 +21,7 @@ namespace Mapillary.Models
 
 
         public string Title { get { return m_title; } set { m_title = value; OnPropertyChanged("Title"); } }
-        public Uri ImageSource { get { return m_imageSource; } set { m_imageSource = value; OnPropertyChanged("ImageSource"); } }
+        public BitmapImage ImageSource { get { return m_imageSource; } set { m_imageSource = value; OnPropertyChanged("ImageSource"); } }
         public DateTime TimeStamp { get { return m_timeStamp; } set { m_timeStamp = value; OnPropertyChanged("TimeStamp"); } }
         public StorageFile File { get { return m_file; } set { m_file = value; OnPropertyChanged("File"); } }
         public StorageFile ThumbFile { get { return m_thumbfile; } set { m_thumbfile = value; OnPropertyChanged("ThumbFile"); } }

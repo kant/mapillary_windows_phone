@@ -15,6 +15,7 @@ namespace Mapillary.Services
         internal static string SignInToken { get; set; }
         internal static string SignInEmail { get; set; }
         internal static string SignInUserName { get; set; }
+        private static string s_password;
 
 
         private static string SIGN_IN_URI = "https://a.mapillary.com/v2/ua/login?client_id={0}";
@@ -31,30 +32,31 @@ namespace Mapillary.Services
             return false;
         }
 
-        //internal async static Task<bool> RefreshTokens()
-        //{
-        //    var lastLogin = SettingsHelper.GetObject<DateTime>("SignInTime");
-        //    if (lastLogin == null || IsLoggedIn == false)
-        //    {
-        //        return false;
-        //    }
+        internal async static Task<bool> RefreshTokens()
+        {
+            var lastLogin = SettingsHelper.GetObject<DateTime>("SignInTime");
+            if (lastLogin == null || IsLoggedIn == false)
+            {
+                return false;
+            }
 
-        //    string email = SettingsHelper.GetValue("SignInEmail", null);
-        //    string password = SettingsHelper.GetValue("SignInPassword", null);
-        //    if (email == null || password == null)
-        //    {
-        //        return false;
-        //    }
+            string email = SettingsHelper.GetValue("SignInEmail", null);
+            string password = SettingsHelper.GetValue("SignInPassword", null);
+            if (email == null || password == null)
+            {
+                return false;
+            }
 
-        //    bool wasLoggedIn = await Login(email, password);
-        //    return wasLoggedIn;
-        //}
+            bool wasLoggedIn = await Login(email, password);
+            return wasLoggedIn;
+        }
 
         internal async static Task<bool> Login(string email, string password)
         {
             string[] tokens = await GetAuthTokens(email, password);
             if (tokens != null)
             {
+                s_password = password;
                 SignInToken = tokens[0];
                 UploadToken = tokens[1];
                 SignInUserName = tokens[2];
@@ -134,6 +136,7 @@ namespace Mapillary.Services
         {
             SignInEmail = null;
             SignInToken = null;
+            s_password = null;
             SaveTokens();
             IsLoggedIn = false;
         }
@@ -202,6 +205,7 @@ namespace Mapillary.Services
                     return status;
                 }
 
+                s_password = password;
                 JObject jobj2 = JObject.Parse(responseString);
                 string token = jobj2["token"].ToString();
                 status.Result = SignupResult.Ok;
@@ -225,6 +229,7 @@ namespace Mapillary.Services
             SettingsHelper.SetValue("SignInToken", SignInToken);
             SettingsHelper.SetValue("SignInEmail", SignInEmail);
             SettingsHelper.SetObject("SignInTime", DateTime.Now);
+            SettingsHelper.SetValue("SignInPassword", s_password);
         }
 
 

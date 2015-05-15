@@ -666,7 +666,7 @@ namespace Mapillary
             mapiData.MAPSequenceUUID = m_sequenceGuid.ToString();
             mapiData.MAPSettingsEmail = LoginService.SignInEmail;
             mapiData.MAPSettingsProject = "";
-            string hashString = LoginService.SignInToken + LoginService.SignInEmail + fileName;
+            string hashString = LoginService.UploadToken + LoginService.SignInEmail + fileName;
             mapiData.MAPSettingsUploadHash = GetUploadHash(hashString);
             mapiData.MAPVersionString = m_appversion;
             return mapiData.GetAsJsonString();

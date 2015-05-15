@@ -84,7 +84,7 @@
             <Border Background="#111111">
             </Border>
             <TextBlock Margin="12,5" Foreground="White" Text="Recent events"/>
-            <Button Content="🔃" TextOptions.DisplayColorEmoji="False" Width="40" FontSize="20" Padding="0" Tap="Refresh_Click" BorderThickness="0" HorizontalAlignment="Right" Margin="0,0,12,0" Style="{StaticResource ButtonStyleNone}"/>
+            <Button Content="🔃" TextOptions.DisplayColorEmoji="False" Width="40" FontSize="30" Padding="0" Tap="Refresh_Click" BorderThickness="0" HorizontalAlignment="Right" Margin="0,0,12,0" Style="{StaticResource ButtonStyleNone}"/>
             <StackPanel x:Name="infoPanel" Grid.Row="1">
                 <TextBlock Margin="0,50,0,0" HorizontalAlignment="Center"  Foreground="#36AF6C" Text="Nothing in your feed yet."/>
                 <TextBlock Margin="0,5,0,0" HorizontalAlignment="Center" Foreground="#36AF6C" Text="Use the camera to change that."/>
@@ -120,7 +120,6 @@
             <shell:ApplicationBarIconButton x:Name="uploadButton" IconUri="/Assets/appbar.arrow.up.png" Text="Upload" Click="uploadButton_Click"/>
             <shell:ApplicationBarIconButton x:Name="profileButton" IconUri="/Assets/appbar.people.profile.png" Text="Profile" Click="profileButton_Click"/>
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Click="deleteButton_Click" Text="Edit photos"/>
                 <shell:ApplicationBarMenuItem Click="settingsButton_Click" Text="Settings"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
