@@ -41,6 +41,13 @@ namespace Mapillary
         {
             try
             {
+                App.EventListCache = null;
+                App.FeedLastRefreshed = DateTime.MinValue;
+                App.ProfileLastRefreshed = DateTime.MinValue;
+                App.AboutProfileCache = null;
+                App.NumConnProfileCache = null;
+                App.NumMetersProfileCache = null;
+                App.NumPhotosProfileCache = null;
                 bool wasLoggedIn = await LoginService.Login(email, password);
                 if (wasLoggedIn)
                 {

@@ -55,8 +55,8 @@
         <StackPanel Grid.Row="1" Margin="12,17,0,28">
             <TextBlock Text="Upload photos" Foreground="#ffffff" FontSize="35" Margin="9,7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
             <StackPanel Orientation="Horizontal">
-                <Button Content="Start" x:Name="startButton" Width="140" IsEnabled="False"  HorizontalAlignment="Left" Foreground="#eeeeee" Background="#666666" Click="startButton_Click"/>
-                <Button Content="Pause" x:Name="pauseButton" Width="140" HorizontalAlignment="Left" Foreground="#eeeeee" Background="#666666" Click="pauseButton_Click"/>
+                <Button Content="Start" x:Name="startButton" Width="140" IsEnabled="False"  HorizontalAlignment="Left" Foreground="#eeeeee" Background="#666666" Click="startButton_Click" Template="{StaticResource ButtonTemplate1}"/>
+                <Button Content="Pause" x:Name="pauseButton" Width="140" HorizontalAlignment="Left" Foreground="#eeeeee" Background="#666666" Click="pauseButton_Click" Template="{StaticResource ButtonTemplate1}"/>
                 <StackPanel x:Name="totalProgressPanel">
                     <TextBlock x:Name="uploadStatus" Text="Uploaded" Foreground="#eeeeee" FontSize="20" Margin="9,7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
                     <StackPanel Orientation="Horizontal" Margin="10,4">

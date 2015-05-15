@@ -59,8 +59,8 @@
                         </StackPanel>
                         <TextBlock x:Name="imgNumText" Margin="24,0,0,0" TextWrapping="Wrap" Text="Photo 1 of 100" Foreground="#eeeeee" FontSize="20" />
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="nextBtn" Content="Next >>" Width="150" FontSize="22" Margin="12,30,0,0" Click="nextBtn_Click"/>
-                            <Button x:Name="closeBtn" Content="Close" Width="150" FontSize="22" Margin="0,30,0,0" Click="closeBtn_Click"/>
+                            <Button x:Name="nextBtn" Content="Next >>" Width="150" FontSize="22" Margin="12,30,0,0" Click="nextBtn_Click" Template="{StaticResource ButtonTemplate1}"/>
+                            <Button x:Name="closeBtn" Content="Close" Width="150" FontSize="22" Margin="0,30,0,0" Click="closeBtn_Click" Template="{StaticResource ButtonTemplate1}"/>
                         </StackPanel>
                         <TextBlock x:Name="noteTxt" Margin="30,22,0,0" TextWrapping="Wrap" Text="" Foreground="#eeeeee" FontSize="15" />
                     </StackPanel>
@@ -91,7 +91,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" Mode="Default"  ForegroundColor="White" IsMenuEnabled="True">
+        <shell:ApplicationBar IsVisible="True" Mode="Default" BackgroundColor="#242528" ForegroundColor="White" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="uploadButton" IconUri="/Assets/appbar.arrow.up.png"  Text="Upload" Click="uploadButton_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

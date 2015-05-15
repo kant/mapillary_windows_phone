@@ -41,12 +41,13 @@
                     <HyperlinkButton x:Name="signOut" Margin="12,12" Foreground="#eeeeee" Content="Sign out" HorizontalAlignment="Left" Tap="signOut_Tap"/>
                     <HyperlinkButton Margin="12,12" Foreground="#eeeeee" Content="Show tutorial" HorizontalAlignment="Left" Tap="ShowTutorial_Tap"/>
                     <TextBlock Text="Developer info" FontSize="25" Margin="12,10" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
-                    <TextBlock Text="Developed by Ovesen.net, Bodø" Margin="12,5" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock Text="Developed by Tommy Ovesen, Bodø" Margin="12,5" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
                     <TextBlock Text="https://www.facebook.com/ovesen.net" Margin="12,5" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
                     <TextBlock Text="Mapillary for Windows Phone is developed in cooperation with Mapillary AB, but it is not an official product of Mapillary AB." Margin="12,5" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
                     <TextBlock Text="Please like Ovesen.net on Facebook to provide feedback and suggestions on the Mapillary for Windows Phone app." Margin="12,5" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
 
-                    <TextBlock Foreground="#eeeeee" Margin="0,10,0,10" FontSize="18" TextWrapping="Wrap" Text="Other Apps from Ovesen.net" />
+                    <TextBlock Foreground="Red" Margin="12,10,0,10" FontSize="18" TextWrapping="Wrap" Text="Other Apps from Ovesen.net" />
+                    <HyperlinkButton Margin="5" Foreground="LightBlue" Tag="PhotoTxt" HorizontalAlignment="Left" FontSize="18" Content="PhotoTxt" Tap="HyperlinkButton_Tap" />
                     <HyperlinkButton Margin="5" Foreground="LightBlue" Tag="PhotoTxtW" HorizontalAlignment="Left" FontSize="18" Content="PhotoTxt Weather" Tap="HyperlinkButton_Tap" />
                     <HyperlinkButton Margin="5" Foreground="LightBlue" Tag="PhotoTxtC" HorizontalAlignment="Left" FontSize="18" Content="PhotoTxt Christmas" Tap="HyperlinkButton_Tap" />
                     <HyperlinkButton Margin="5" Foreground="LightBlue" Tag="PhotoTxtM" HorizontalAlignment="Left" FontSize="18" Content="My Big Day Photos" Tap="HyperlinkButton_Tap" />

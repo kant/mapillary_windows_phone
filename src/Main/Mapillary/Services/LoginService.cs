@@ -228,6 +228,7 @@ namespace Mapillary.Services
         {
             SettingsHelper.SetValue("SignInToken", SignInToken);
             SettingsHelper.SetValue("SignInEmail", SignInEmail);
+            SettingsHelper.SetValue("UploadToken", UploadToken);
             SettingsHelper.SetObject("SignInTime", DateTime.Now);
             SettingsHelper.SetValue("SignInPassword", s_password);
         }

@@ -88,7 +88,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" Mode="Default"  ForegroundColor="White" IsMenuEnabled="True">
+        <shell:ApplicationBar IsVisible="True" Mode="Default" BackgroundColor="#242528" ForegroundColor="White" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="infoButton" IconUri="/Assets/appbar.settings.png"  Text="Settings" Click="infoButton_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
