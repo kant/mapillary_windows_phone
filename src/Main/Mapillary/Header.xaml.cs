@@ -102,6 +102,28 @@ namespace Mapillary
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         int tapCount;
         private void Image_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
@@ -129,6 +151,7 @@ namespace Mapillary
         void image_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             ((Image)sender).Visibility = Visibility.Collapsed;
+            ((Grid)this.Parent).Children.Remove(((Image)sender));
             sender = null;
         }
     }

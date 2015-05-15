@@ -230,6 +230,7 @@
     <Content Include="Assets\no_activity_yet.png" />
     <Content Include="Assets\ronny.jpg" />
     <Content Include="Assets\silhouette.png" />
+    <Content Include="SplashScreenImage.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <None Include="Assets\2014_05_05_12_12_12_123.jpg" />
