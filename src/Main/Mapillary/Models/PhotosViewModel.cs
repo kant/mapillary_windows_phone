@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
@@ -99,7 +100,7 @@ namespace Mapillary.Models
                             imageData.Title = item.Name;
                             imageData.File = item;
                             imageData.ThumbFile = await folder.GetFileAsync("thumb_" + item.Name);
-                            imageData.ImageSource = new Uri(imageData.ThumbFile.Path);
+                            imageData.ImageSource = new BitmapImage(new Uri(imageData.ThumbFile.Path)) { CreateOptions = BitmapCreateOptions.IgnoreImageCache };
                             imageList.Add(imageData);
                         }
 

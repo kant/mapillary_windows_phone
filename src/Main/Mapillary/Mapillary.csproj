@@ -130,8 +130,8 @@
     <Compile Include="CapturePage.xaml.cs">
       <DependentUpon>CapturePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DeletePage.xaml.cs">
-      <DependentUpon>DeletePage.xaml</DependentUpon>
+    <Compile Include="EditPage.xaml.cs">
+      <DependentUpon>EditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="InfoPage.xaml.cs">
       <DependentUpon>InfoPage.xaml</DependentUpon>
@@ -186,7 +186,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DeletePage.xaml">
+    <Page Include="EditPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -216,11 +216,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\appbar.delete.png" />
     <Content Include="Assets\appbar.home.png" />
     <Content Include="Assets\appbar.image.png" />
     <Content Include="Assets\appbar.map.png" />
+    <Content Include="Assets\appbar.page.copy.png" />
     <Content Include="Assets\appbar.people.profile.png" />
     <Content Include="Assets\appbar.settings.png" />
+    <Content Include="Assets\appbar.share.png" />
+    <Content Include="Assets\appbar.transform.rotate.clockwise.png" />
+    <Content Include="Assets\appbar.transform.rotate.counterclockwise.png" />
     <Content Include="Assets\btn_capture_action.png" />
     <Content Include="Assets\no_activity_yet.png" />
     <Content Include="Assets\ronny.jpg" />

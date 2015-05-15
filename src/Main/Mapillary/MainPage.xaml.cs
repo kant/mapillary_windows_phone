@@ -194,7 +194,7 @@ namespace Mapillary
             if (SettingsHelper.GetValue("FirstTimeLoaded", "false") == "false")
             {
                 DisplayHelpPopUp();
-                var result = MessageBox.Show("Mapillary would like to use your current location. Is that OK?", "Confirm", MessageBoxButton.OKCancel);
+                var result = MessageBox.Show("Mapillary must use your current location to work. Is that OK?", "Confirm", MessageBoxButton.OKCancel);
                 SettingsHelper.SetValue("FirstTimeLoaded", "true");
                 if (result == MessageBoxResult.Cancel)
                 {
@@ -233,7 +233,7 @@ namespace Mapillary
 
             int count = await UpdateCounter();
             UpdateLiveTile(count);
-           // var success = await LoginService.RefreshTokens();
+            var success = await LoginService.RefreshTokens();
         }
 
         private async Task LoadFeed()
@@ -451,7 +451,6 @@ namespace Mapillary
         private async void ShowMap()
         {
             if (!CheckLocationConsent()) return;
-            //NavigationService.Navigate(new Uri("/MapPage.xaml", UriKind.Relative));
             if (App.GeoLocator != null)
             {
                 Geoposition pos = await App.GeoLocator.GetGeopositionAsync(TimeSpan.FromMinutes(1), TimeSpan.FromSeconds(10));
@@ -469,14 +468,9 @@ namespace Mapillary
         }
 
 
-        private void deleteButton_Click(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/DeletePage.xaml", UriKind.Relative));
-        }
-
         private void uploadButton_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/UploadPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/EditPage.xaml", UriKind.Relative));
         }
 
         private bool CheckLocationConsent()
@@ -529,7 +523,7 @@ namespace Mapillary
             {
                 var item = grid.DataContext as FeedItem;
                 //string url = string.Format("http://www.mapillary.com/map/im/{0}/compact?client_id={1}&client=wp", item.MKey, App.WP_CLIENT_ID);
-                if (item.ObjectType == "s")
+                if (item.ObjectType == "s" || item.ObjectType == "im" || item.ObjectType == "co" || item.ObjectType == "cm")
                 {
                     string url = String.Format("http://www.mapillary.com/map/{0}/{1}/compact?client_id={2}&client=wp", item.ObjectType, item.ObjectKey, App.WP_CLIENT_ID);
                     OpenBrowser(url);

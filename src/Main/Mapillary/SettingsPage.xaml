@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Mapillary"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -17,18 +18,19 @@
     <Grid x:Name="LayoutRoot" Background="#242528">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <local:Header Height="55" Margin="0"/>
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MAPILLARY" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Settings" Foreground="#eeeeee" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel Grid.Row="1" Margin="12,17,0,28">
+            <TextBlock Text="Settings" Foreground="#eeeeee" FontSize="40" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
         <TextBlock x:Name="version" Foreground="#eeeeee" FontSize="16" FontFamily="Arial" Margin="0,19,20,0" HorizontalAlignment="Right" Text="Version" Style="{StaticResource PhoneTextNormalStyle}"/>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="2" Margin="12,0,12,0">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">
                 <StackPanel>
                     <TextBlock Margin="12,12" Text="Riding mode capture interval (ms):" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
