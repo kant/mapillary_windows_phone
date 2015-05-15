@@ -24,7 +24,7 @@ namespace Mapillary
         public static int CaptureInterval { get; set; }
         public static bool ShutterSoundEnabled { get; set; }
         public static bool SaveToCameraRollEnabled { get; set; }
-        public static string WP_CLIENT_ID = "MkJKbDA0bnZuZlcxeTJHTmFqN3g1dzo0ZmYxN2MzMTRlYzM1M2E2";
+        public static string WP_CLIENT_ID = "<key>";
         public static Windows.Devices.Geolocation.Geolocator GeoLocator { get; set; }
         public static List<ImgSequence> SequenceListCache { get; set; }
         public static List<FeedItem> EventListCache { get; set; }
