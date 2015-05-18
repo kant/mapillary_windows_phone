@@ -29,8 +29,8 @@ namespace Mapillary
     public partial class UploadPage : PhoneApplicationPage, INotifyPropertyChanged
     {
         private string m_uploadUrl = "http://mapillary.uploads.images.s3.amazonaws.com/";
-        private string m_policy = "eyJleHBpcmF0aW9uIjoiMjAyMC0wMS0wMVQwMDowMDowMFoiLCJjb25kaXRpb25zIjpbeyJidWNrZXQiOiJtYXBpbGxhcnkudXBsb2Fkcy5pbWFnZXMifSxbInN0YXJ0cy13aXRoIiwiJGtleSIsIiJdLHsiYWNsIjoicHJpdmF0ZSJ9LFsic3RhcnRzLXdpdGgiLCIkQ29udGVudC1UeXBlIiwiIl0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMCwxMDQ4NTc2MF1dfQ==";
-        private string m_signature = "foNqRicU/vySm8/qU82kGESiQhY=";
+        private string m_policy = "<policy>";
+        private string m_signature = "<signature>";
 
         private int countUploaded = 0;
         private int countToUpload = 0;
@@ -211,7 +211,7 @@ namespace Mapillary
 
             if (!IsWlanEnabled() && SettingsHelper.GetValue("AllowCellularData", "false") == "false")
             {
-                var result = MessageBox.Show("You are connected to the internet via cellular data. Uploading is diabled. You can enable cellular upload in the settings.", "No WiFi", MessageBoxButton.OK);
+                var result = MessageBox.Show("You are connected to the internet via cellular data. Uploading is disabled. You can enable cellular upload in the settings.", "No WiFi", MessageBoxButton.OK);
                 return false;
             }
 
