@@ -51,9 +51,9 @@ namespace Mapillary
 
             SystemTray.SetProgressIndicator(this, progress);
             //    for (int i = 0; i <= 10;i++ )
-        //        for (int x = 0; x <= 60; x++)
-        //        CopyTestImage(i,x);
-        //
+            //        for (int x = 0; x <= 60; x++)
+            //        CopyTestImage(i,x);
+            //
         }
 
         private async void DoLoginOrLoadFeed()
@@ -95,15 +95,15 @@ namespace Mapillary
             }
         }
 
-        private void CopyTestImage(int i,int x)
+        private void CopyTestImage(int i, int x)
         {
             var uri = new Uri("Assets\\2014_05_05_12_12_12_123.jpg", UriKind.Relative);
             var sri = Application.GetResourceStream(uri);
             var data = sri.Stream;
             IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication();
-            using (IsolatedStorageFileStream stream = storage.CreateFile("shared\\transfers\\2014_05_06_12_12_"+i +"_"+x+".jpg"))
+            using (IsolatedStorageFileStream stream = storage.CreateFile("shared\\transfers\\2014_05_06_12_12_" + i + "_" + x + ".jpg"))
             {
-               data.CopyTo(stream);
+                data.CopyTo(stream);
             }
 
             var uri2 = new Uri("Assets\\thumb_2014_05_05_12_12_12_123.jpg", UriKind.Relative);
@@ -134,7 +134,7 @@ namespace Mapillary
             if (!CheckLocationConsent()) return;
             NavigationService.Navigate(new Uri("/CapturePage.xaml", UriKind.Relative));
         }
-        
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -321,9 +321,9 @@ namespace Mapillary
                 }
                 else
                 {
-                   //MessageBox.Show("An error occurred while getting your feed. Please try again.", "Error", MessageBoxButton.OK);
+                    //MessageBox.Show("An error occurred while getting your feed. Please try again.", "Error", MessageBoxButton.OK);
                 }
-         }
+            }
             catch (Exception ex)
             {
                 //MessageBox.Show("An error occurred while getting your feed: " + ex.Message, "Error", MessageBoxButton.OK);
@@ -337,9 +337,9 @@ namespace Mapillary
         {
             var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("shared\\transfers");
             var images = await folder.GetFilesAsync();
-            for (int i = 0;i<100;i++)
+            for (int i = 0; i < 100; i++)
             {
-                foreach(var file in images)
+                foreach (var file in images)
                 {
                     string name = "_" + i + ".jpg";
                     await file.CopyAsync(folder, file.Name.Replace(".jpg", name));
@@ -357,7 +357,7 @@ namespace Mapillary
                     {
                         if (album.Name == "Camera Roll")
                         {
-                            var images = from r in album.Pictures where r.Name.StartsWith("mapi_thumb_")  select r;
+                            var images = from r in album.Pictures where r.Name.StartsWith("mapi_thumb_") select r;
                             var count = images.Count();
                             return count;
                         }
@@ -384,7 +384,6 @@ namespace Mapillary
                     return count;
                 }
             }
-
         }
 
         private void InitializeGeoLocator()
@@ -435,14 +434,11 @@ namespace Mapillary
                 Deployment.Current.Dispatcher.BeginInvoke(async () =>
                 {
                     Geoposition pos = await m_geolocator.GetGeopositionAsync(TimeSpan.FromMinutes(1), TimeSpan.FromSeconds(10));
-                    //await LoadPlaceName(pos);
                     m_currentPosition = pos;
                 });
 
             }
         }
-
-
 
         private void Geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
@@ -456,7 +452,8 @@ namespace Mapillary
                 Geoposition pos = await App.GeoLocator.GetGeopositionAsync(TimeSpan.FromMinutes(1), TimeSpan.FromSeconds(10));
                 string lat = pos.Coordinate.Latitude.ToString(new CultureInfo("en-US"));
                 string lng = pos.Coordinate.Longitude.ToString(new CultureInfo("en-US"));
-                var uri = new Uri("http://www.mapillary.com/map/im/16/" + lat + "/" + lng + "?showCenter&client=iphone&client-version=1.8");
+                var ver = new AssemblyName(Assembly.GetExecutingAssembly().FullName);
+                var uri = new Uri("http://www.mapillary.com/map/im/16/" + lat + "/" + lng + "/compact?showCenter&client=wp&client-version=" + ver.Version);
                 WebBrowserTask task = new WebBrowserTask();
                 task.Uri = uri;
                 task.Show();
@@ -489,7 +486,7 @@ namespace Mapillary
             return m_locationConsent;
         }
 
-        
+
         private void settingsButton_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
@@ -522,7 +519,6 @@ namespace Mapillary
             if (grid != null)
             {
                 var item = grid.DataContext as FeedItem;
-                //string url = string.Format("http://www.mapillary.com/map/im/{0}/compact?client_id={1}&client=wp", item.MKey, App.WP_CLIENT_ID);
                 if (item.ObjectType == "s" || item.ObjectType == "im" || item.ObjectType == "co" || item.ObjectType == "cm")
                 {
                     string url = String.Format("http://www.mapillary.com/map/{0}/{1}/compact?client_id={2}&client=wp", item.ObjectType, item.ObjectKey, App.WP_CLIENT_ID);
@@ -533,7 +529,6 @@ namespace Mapillary
 
         private async void OpenBrowser(string url)
         {
-            //NavigationService.Navigate(new Uri("/MapPage.xaml", UriKind.Relative));
             WebBrowserTask task = new WebBrowserTask();
             task.Uri = new Uri(url);
             task.Show();

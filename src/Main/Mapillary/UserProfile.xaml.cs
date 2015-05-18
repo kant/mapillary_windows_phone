@@ -214,7 +214,6 @@ namespace Mapillary
 
         private async void ShowMap(string url)
         {
-            //NavigationService.Navigate(new Uri("/MapPage.xaml", UriKind.Relative));
             WebBrowserTask task = new WebBrowserTask();
             task.Uri = new Uri(url);
             task.Show();

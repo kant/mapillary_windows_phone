@@ -188,7 +188,7 @@ namespace Mapillary
             string val = "(none)";
             if (m_compassReading != null)
             {
-                val = Math.Round(m_compassReading.HeadingMagneticNorth, 0).ToString() + "°";
+                val = Math.Round(Adjust90(m_compassReading.HeadingMagneticNorth), 0).ToString() + "°";
             }
 
             Dispatcher.BeginInvoke(() => { compassText.Text = "Compass: " + val; });
@@ -280,7 +280,7 @@ namespace Mapillary
             currentPosText.Text = "Current pos: " + m_currentposition.Latitude + " / " + m_currentposition.Longitude + " / " + m_currentposition.Speed + " / " + m_currentposition.HorizontalAccuracy;
             if (m_compassReading != null)
             {
-                currentPosText.Text += " / " + m_compassReading.HeadingMagneticNorth + " (" + Math.Round(m_calculatedHeading, 0).ToString() + "°)";
+                currentPosText.Text += " / " + Adjust90(m_compassReading.HeadingMagneticNorth) + " (" + Math.Round(m_calculatedHeading, 0).ToString() + "°)";
             }
             else
             {
@@ -293,6 +293,7 @@ namespace Mapillary
                 string val = "(none)";
                 val = Math.Round(m_calculatedHeading, 0).ToString() + "°";
                 compassText.Text = "Compass: " + val;
+                Debug.WriteLine("DIR:" + val);
             }
             CheckAccuracy(accuracy);
         }
@@ -645,8 +646,8 @@ namespace Mapillary
             mapiData.MAPCompassHeading = new CompassHeading();
             if (m_compassReading != null)
             {
-                mapiData.MAPCompassHeading.MagneticHeading = m_compassReading.HeadingMagneticNorth.ToString(enUs);
-                mapiData.MAPCompassHeading.TrueHeading = m_compassReading.HeadingTrueNorth.HasValue ? m_compassReading.HeadingTrueNorth.Value.ToString(enUs) : mapiData.MAPCompassHeading.MagneticHeading;
+                mapiData.MAPCompassHeading.MagneticHeading = Adjust90(m_compassReading.HeadingMagneticNorth).ToString(enUs);
+                mapiData.MAPCompassHeading.TrueHeading = m_compassReading.HeadingTrueNorth.HasValue ? Adjust90(m_compassReading.HeadingTrueNorth.Value).ToString(enUs) : mapiData.MAPCompassHeading.MagneticHeading;
             }
             else
             {
@@ -670,6 +671,13 @@ namespace Mapillary
             mapiData.MAPSettingsUploadHash = GetUploadHash(hashString);
             mapiData.MAPVersionString = m_appversion;
             return mapiData.GetAsJsonString();
+        }
+
+        private double Adjust90(double val)
+        {
+            double v = val + 90;
+            if (v >= 360) v = v - 360;
+            return v;
         }
 
         private string GetUploadHash(string hashString)

@@ -205,8 +205,8 @@ namespace Mapillary
 
             if (!IsWlanEnabled())
             {
-                var result = MessageBox.Show("You are connected to the internet via cellular data. Unable to transfer. Please connect to WiFi before uploading.", "No WiFi", MessageBoxButton.OK);
-                return false;
+                var result = MessageBox.Show("You are connected to the internet via cellular data. Uploading can be expensive. Are you sure you want to upload now?", "No WiFi", MessageBoxButton.OK);
+                return true;
             }
 
             return true;
