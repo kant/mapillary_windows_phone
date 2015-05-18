@@ -247,6 +247,7 @@ namespace Mapillary
                 var httpClient = new HttpClient(new HttpClientHandler());
                 var request = new HttpRequestMessage(HttpMethod.Get, new Uri(url));
                 request.Headers.Add("Authorization", "Bearer " + LoginService.SignInToken);
+                request.Headers.Add("If-Modified-Since", DateTime.UtcNow.ToString("r")); 
                 HttpResponseMessage response = await httpClient.SendAsync(request);
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
@@ -316,7 +317,6 @@ namespace Mapillary
 
                     eventList.ItemsSource = feedList;
                     App.EventListCache = feedList;
-                    ShowHideList(feedList != null && feedList.Count > 0);
                     App.FeedLastRefreshed = DateTime.Now;
                 }
                 else
@@ -329,6 +329,7 @@ namespace Mapillary
                 //MessageBox.Show("An error occurred while getting your feed: " + ex.Message, "Error", MessageBoxButton.OK);
             }
 
+            ShowHideList(App.EventListCache != null && App.EventListCache.Count > 0);
             SystemTray.SetIsVisible(this, false);
             progress.IsVisible = false;
         }
