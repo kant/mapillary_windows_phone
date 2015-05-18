@@ -205,8 +205,8 @@ namespace Mapillary
 
             if (!IsWlanEnabled() && SettingsHelper.GetValue("AllowCellularData", "false") == "true")
             {
-                var result = MessageBox.Show("You are connected to the internet via cellular data. Uploading can be expensive. Are you sure you want to upload now?", "No WiFi", MessageBoxButton.OK);
-                return true;
+                var result = MessageBox.Show("You are connected to the internet via cellular data. Uploading can be expensive. Are you sure you want to upload now?", "No WiFi", MessageBoxButton.OKCancel);
+                return result == MessageBoxResult.OK;
             }
 
             if (!IsWlanEnabled() && SettingsHelper.GetValue("AllowCellularData", "false") == "false")
