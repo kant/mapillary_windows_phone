@@ -114,6 +114,7 @@ namespace Mapillary.Services
             var httpClient = new HttpClient(new HttpClientHandler());
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
             request.Headers.Add("Authorization", "Bearer " + authToken);
+            request.Headers.Add("If-Modified-Since", DateTime.UtcNow.ToString("r"));
             HttpResponseMessage response = await httpClient.SendAsync(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
