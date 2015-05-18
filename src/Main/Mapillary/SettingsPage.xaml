@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:local="clr-namespace:Mapillary"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -14,7 +15,27 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="False">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn" />
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn" />
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut" />
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut" />
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+    
     <Grid x:Name="LayoutRoot" Background="#242528">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -44,6 +65,8 @@
                             <TextBlock Text="Store photos in camera roll instead of internal app storage. Photos must be deleted manually in the library after uploading. This is only recommended if you need to copy all photos from the phone via a PC." TextWrapping="Wrap" Foreground="#eeeeee" />
                         </CheckBox.Content>
                     </CheckBox>
+                    <CheckBox BorderBrush="White" x:Name="useCellularDataChk" Foreground="White" Margin="12,8,12,0" Content="Allow use of cellular data for upload" Unchecked="useCellularDataChk_Unchecked"  Checked="useCellularDataChk_Checked"  Style="{StaticResource CheckBoxStyle1}"/>
+                    <TextBlock Margin="38,0" Text="Turning on this will upload on any network, otherwise only on a WiFi connection." FontSize="15" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
                     <CheckBox BorderBrush="White" x:Name="locationChk" Foreground="White" Margin="12,8,12,0" Content="Location consent is on" Unchecked="locationChk_Checked" Checked="locationChk_Checked" Style="{StaticResource CheckBoxStyle1}"/>
                     <TextBlock Margin="38,0" Text="Turning off location consent will disable the camera capture function." FontSize="15" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
 

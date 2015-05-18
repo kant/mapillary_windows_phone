@@ -203,10 +203,16 @@ namespace Mapillary
                 return false;
             }
 
-            if (!IsWlanEnabled())
+            if (!IsWlanEnabled() && SettingsHelper.GetValue("AllowCellularData", "false") == "true")
             {
                 var result = MessageBox.Show("You are connected to the internet via cellular data. Uploading can be expensive. Are you sure you want to upload now?", "No WiFi", MessageBoxButton.OK);
                 return true;
+            }
+
+            if (!IsWlanEnabled() && SettingsHelper.GetValue("AllowCellularData", "false") == "false")
+            {
+                var result = MessageBox.Show("You are connected to the internet via cellular data. Uploading is diabled. You can enable cellular upload in the settings.", "No WiFi", MessageBoxButton.OK);
+                return false;
             }
 
             return true;
