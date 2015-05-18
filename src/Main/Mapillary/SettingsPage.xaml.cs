@@ -29,6 +29,8 @@ namespace Mapillary
             storePhotosInCameraRollChk.IsChecked = bool.Parse(SettingsHelper.GetValue("SaveToCameraRollEnabled", Boolean.FalseString));
             intervalValue.Text = App.CaptureInterval.ToString();
             m_locationConcentOn = SettingsHelper.GetValue("LocationConsent", "false") == "true";
+            useCellularDataChk.IsChecked = SettingsHelper.GetValue("AllowCellularData", "false") == "true";
+
             if (m_locationConcentOn)
             {
                 locationChk.IsChecked = true;
@@ -92,6 +94,16 @@ namespace Mapillary
                 SettingsHelper.SetValue("LocationConsent", "false");
                 locationChk.Content = "Location consent is OFF";
             }
+        }
+
+        private void useCellularDataChk_Checked(object sender, RoutedEventArgs e)
+        {
+            SettingsHelper.SetValue("AllowCellularData", "true");
+        }
+
+        private void useCellularDataChk_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SettingsHelper.SetValue("AllowCellularData", "false");
         }
 
     }
