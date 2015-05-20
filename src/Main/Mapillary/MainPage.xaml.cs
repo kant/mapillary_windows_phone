@@ -243,7 +243,7 @@ namespace Mapillary
                 SystemTray.SetIsVisible(this, true);
                 SystemTray.SetOpacity(this, 0);
                 progress.IsVisible = true;
-                string url = string.Format(FEED_URI, App.WP_CLIENT_ID);
+                string url = string.Format(FEED_URI, Keys.WP_CLIENT_ID);
                 var httpClient = new HttpClient(new HttpClientHandler());
                 var request = new HttpRequestMessage(HttpMethod.Get, new Uri(url));
                 request.Headers.Add("Authorization", "Bearer " + LoginService.SignInToken);
@@ -522,7 +522,7 @@ namespace Mapillary
                 var item = grid.DataContext as FeedItem;
                 if (item.ObjectType == "s" || item.ObjectType == "im" || item.ObjectType == "co" || item.ObjectType == "cm")
                 {
-                    string url = String.Format("http://www.mapillary.com/map/{0}/{1}/compact?client_id={2}&client=wp", item.ObjectType, item.ObjectKey, App.WP_CLIENT_ID);
+                    string url = String.Format("http://www.mapillary.com/map/{0}/{1}/compact?client_id={2}&client=wp", item.ObjectType, item.ObjectKey, Keys.WP_CLIENT_ID);
                     OpenBrowser(url);
                 }
             }

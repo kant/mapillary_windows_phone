@@ -69,7 +69,7 @@ namespace Mapillary
                 SystemTray.SetIsVisible(this, true);
                 SystemTray.SetOpacity(this, 0);
                 progress.IsVisible = true;
-                string url = string.Format(SEQ_URI, LoginService.SignInUserName, App.WP_CLIENT_ID);
+                string url = string.Format(SEQ_URI, LoginService.SignInUserName, Keys.WP_CLIENT_ID);
                 var httpClient = new HttpClient(new HttpClientHandler());
                 HttpResponseMessage response = await httpClient.GetAsync(new Uri(url));
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -146,7 +146,7 @@ namespace Mapillary
                 SystemTray.SetIsVisible(this, true);
                 SystemTray.SetOpacity(this, 0);
                 progress.IsVisible = true;
-                string url = string.Format(PROFILE_URI, LoginService.SignInUserName, App.WP_CLIENT_ID);
+                string url = string.Format(PROFILE_URI, LoginService.SignInUserName, Keys.WP_CLIENT_ID);
                 var httpClient = new HttpClient(new HttpClientHandler());
                 HttpResponseMessage response = await httpClient.GetAsync(new Uri(url));
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -207,7 +207,7 @@ namespace Mapillary
             if (grid != null)
             {
                 var item = grid.DataContext as ImgSequence;
-                string url = string.Format("http://www.mapillary.com/map/im/{0}/compact?client_id={1}&client=wp", item.MKey, App.WP_CLIENT_ID);
+                string url = string.Format("http://www.mapillary.com/map/im/{0}/compact?client_id={1}&client=wp", item.MKey, Keys.WP_CLIENT_ID);
                 ShowMap(url);
             }
         }

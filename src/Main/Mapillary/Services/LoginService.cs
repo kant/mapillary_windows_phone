@@ -80,7 +80,7 @@ namespace Mapillary.Services
                         new KeyValuePair<string, string>("email", email),
                         new KeyValuePair<string, string>("password", password)
                     };
-                Uri uri = new Uri(string.Format(SIGN_IN_URI, App.WP_CLIENT_ID));
+                Uri uri = new Uri(string.Format(SIGN_IN_URI, Keys.WP_CLIENT_ID));
                 var httpClient = new HttpClient(new HttpClientHandler());
                 var request = new HttpRequestMessage(HttpMethod.Post, uri);
                 request.Content = new FormUrlEncodedContent(values);
@@ -110,7 +110,7 @@ namespace Mapillary.Services
 
         private static async Task<string[]> GetTokensWithJwt(string authToken)
         {
-            Uri uri = new Uri(string.Format(TOKENS_URI, App.WP_CLIENT_ID, authToken));
+            Uri uri = new Uri(string.Format(TOKENS_URI, Keys.WP_CLIENT_ID, authToken));
             var httpClient = new HttpClient(new HttpClientHandler());
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
             request.Headers.Add("Authorization", "Bearer " + authToken);
@@ -152,7 +152,7 @@ namespace Mapillary.Services
                     };
 
                 var httpClient = new HttpClient(new HttpClientHandler());
-                Uri uri = new Uri(string.Format(PWD_RESET_URI, App.WP_CLIENT_ID));
+                Uri uri = new Uri(string.Format(PWD_RESET_URI, Keys.WP_CLIENT_ID));
                 HttpResponseMessage response = await httpClient.PostAsync(uri, new FormUrlEncodedContent(values));
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
@@ -187,7 +187,7 @@ namespace Mapillary.Services
                     };
 
                 var httpClient = new HttpClient(new HttpClientHandler());
-                Uri uri = new Uri(string.Format(SIGN_UP_URI, App.WP_CLIENT_ID));
+                Uri uri = new Uri(string.Format(SIGN_UP_URI, Keys.WP_CLIENT_ID));
                 HttpResponseMessage response = await httpClient.PostAsync(uri, new FormUrlEncodedContent(values));
                 status.StatusCode = response.StatusCode;
                 var responseString = await response.Content.ReadAsStringAsync();
