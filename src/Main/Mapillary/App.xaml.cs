@@ -14,6 +14,16 @@ using System.Collections.Generic;
 namespace Mapillary
 {
     /* Mapillary App for Windows Phone. Developed By Tommy Ovesen, tommy@ovesen.net, http://www.facebook.com/ovesen.net */
+
+    /* The following keys must be in place to be able to use mapillary api and amazon upload service
+    public class Keys
+    {
+        public static readonly string WP_CLIENT_ID = "<insert key>";
+        public static readonly string AWS_policy = "<insert policy>";
+        public static readonly string AWS_signature = "<insert signature>";
+    }
+     */
+
     public partial class App : Application
     {
         public static DateTime ProfileLastRefreshed { get; set; }
@@ -21,7 +31,6 @@ namespace Mapillary
         public static int CaptureInterval { get; set; }
         public static bool ShutterSoundEnabled { get; set; }
         public static bool SaveToCameraRollEnabled { get; set; }
-        public static string WP_CLIENT_ID = "<client-id>";
         public static Windows.Devices.Geolocation.Geolocator GeoLocator { get; set; }
         public static List<ImgSequence> SequenceListCache { get; set; }
         public static List<FeedItem> EventListCache { get; set; }

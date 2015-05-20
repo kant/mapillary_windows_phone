@@ -7,6 +7,9 @@
 *.userosscache
 *.sln.docstates
 
+## To prevent uploading the keys to github
+Keys.cs
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

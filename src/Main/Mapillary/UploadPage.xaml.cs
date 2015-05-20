@@ -29,8 +29,6 @@ namespace Mapillary
     public partial class UploadPage : PhoneApplicationPage, INotifyPropertyChanged
     {
         private string m_uploadUrl = "http://mapillary.uploads.images.s3.amazonaws.com/";
-        private string m_policy = "<policy>";
-        private string m_signature = "<signature>";
 
         private int countUploaded = 0;
         private int countToUpload = 0;
@@ -320,8 +318,8 @@ namespace Mapillary
                 parameters.Add("key", upload.Title);
                 parameters.Add("AWSAccessKeyId", "AKIAI2X3BJAT2W75HILA");
                 parameters.Add("acl", "private");
-                parameters.Add("policy", m_policy);
-                parameters.Add("signature", m_signature);
+                parameters.Add("policy", Keys.AWS_policy);
+                parameters.Add("signature", Keys.AWS_signature);
                 parameters.Add("Content-Type", "image/jpeg");
 
                 m_uploadService = new UploadService();
@@ -418,8 +416,8 @@ namespace Mapillary
             httpContent.Add(new StringContent(upload.File.Name), "key");
             httpContent.Add(new StringContent("AKIAI2X3BJAT2W75HILA"), "AWSAccessKeyId");
             httpContent.Add(new StringContent("private"), "acl");
-            httpContent.Add(new StringContent(m_policy), "policy");
-            httpContent.Add(new StringContent(m_signature), "signature");
+            httpContent.Add(new StringContent(Keys.AWS_policy), "policy");
+            httpContent.Add(new StringContent(Keys.AWS_signature), "signature");
             httpContent.Add(new StringContent("image/jpeg"), "Content-Type");
             var fileContentStream = await upload.File.OpenReadAsync();
             var streamContent = new StreamContent(fileContentStream.AsStreamForRead());
