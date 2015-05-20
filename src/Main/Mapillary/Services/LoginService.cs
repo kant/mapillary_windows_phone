@@ -27,7 +27,7 @@ namespace Mapillary.Services
         internal async static Task<bool> LoginTestUser()
         {
 #if DEBUG
-            return await Login("tommy@ovesen.net", "dire55stMa");
+            return false;
 #endif
             return false;
         }
