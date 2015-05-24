@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace Mapillary
 {
-    /* Mapillary App for Windows Phone. Developed By Tommy Ovesen, ***REMOVED***, http://www.facebook.com/ovesen.net */
+    /* Mapillary App for Windows Phone. Developed By Tommy Ovesen, tommy@ovesen.net, http://www.facebook.com/ovesen.net */
 
     /* The following keys must be in place to be able to use mapillary api and amazon upload service
     public class Keys
