@@ -45,6 +45,7 @@ namespace Mapillary
                 deleteBtn.Visibility = Visibility.Collapsed;
                 shareBtn.Visibility = Visibility.Collapsed;
                 rotateBtn.Visibility = Visibility.Collapsed;
+                this.ApplicationBar.Buttons.RemoveAt(1);
                 noteTxt.Text = "Note: When using the media library for storing photos you cannot edit or delete photos here.";
             }
             else
