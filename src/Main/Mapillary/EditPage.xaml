@@ -104,7 +104,7 @@
         <c4f:ProgressOverlay Grid.RowSpan="3" x:Name="progress">
             <c4f:ProgressOverlay.Content>
                 <Border Background="#555555" Height="38">
-                    <TextBlock Text="Loading..." Margin="0,3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="progessText" Text="Loading..." Margin="0,3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 </Border>
             </c4f:ProgressOverlay.Content>
         </c4f:ProgressOverlay>
@@ -113,6 +113,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" Mode="Default" BackgroundColor="#242528" ForegroundColor="White" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="uploadButton" IconUri="/Assets/appbar.arrow.up.png"  Text="Upload" Click="uploadButton_Click"/>
+            <shell:ApplicationBarIconButton x:Name="deleteButton" IconUri="/Assets/appbar.delete.png"  Text="Delete" Click="deleteButton_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

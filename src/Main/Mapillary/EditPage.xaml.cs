@@ -32,6 +32,7 @@ namespace Mapillary
             this.Loaded += EditPage_Loaded;
             noPhotos.Visibility = Visibility.Visible;
             titleCount.Text = string.Empty;
+            progessText.Text = "Loading...";
             progress.Show();
         }
 
@@ -361,6 +362,48 @@ namespace Mapillary
                 Photo image = viewModel.PhotoList[m_selectionIndex-1];
                 OpenEditor(image);
             }
+        }
+
+        private async void deleteButton_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to delete all the photos? This cannot be undone!", "Delete photos", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+            {
+                await DeleteAllPhotos();
+            }
+        }
+
+        private async Task DeleteAllPhotos()
+        {
+            progessText.Text = "Deleting...";
+            progress.Show();
+            foreach (var photo in viewModel.PhotoList)
+            {
+                try
+                {
+                    if (photo.ThumbFile != null)
+                    {
+                        await photo.ThumbFile.DeleteAsync(StorageDeleteOption.PermanentDelete);
+                    }
+
+                    if (photo.File != null)
+                    {
+                        await photo.File.DeleteAsync(StorageDeleteOption.PermanentDelete);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unable to delete: " + ex.Message + ". Continuing..", "Delete failed", MessageBoxButton.OK);
+                }
+
+            }
+
+            viewModel.PhotoList.Clear();
+            photoList.SelectedItem = null;
+            m_selectedFile = null;
+            m_selectedThumbFile = null;
+            UpdateNumPhotos();
+            progress.Hide();
         }
     }
 }
