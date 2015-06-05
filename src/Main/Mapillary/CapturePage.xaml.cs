@@ -78,16 +78,19 @@ namespace Mapillary
             flashBorder.Color = Color.FromArgb(0, 0, 0, 0);
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-            App.SetLockMode(true);
+            Dispatcher.BeginInvoke((Action)(async () =>
+            {
+                base.OnNavigatedTo(e);
+                App.SetLockMode(true);
 
-            await InitCamera();
-            InitCompass();
-            await InitGps();
-            CheckAvailableMem();
-            CheckBattery();
+                await InitCamera();
+                InitCompass();
+                await InitGps();
+                CheckAvailableMem();
+                CheckBattery();
+            }));
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -461,8 +464,30 @@ namespace Mapillary
             {
                 if (Camera == null) return;
                 m_canTakePicture = false;
-                int rotation = OrientationIsLandscape() ? 0 : 90;
-                Camera.SetProperty(KnownCameraGeneralProperties.EncodeWithOrientation, rotation);
+                int encodedOrientation = 0;
+                int sensorOrientation = (Int32)Camera.SensorRotationInDegrees;
+
+                switch (this.Orientation)
+                {
+                    // Camera hardware shutter button up.
+                    case PageOrientation.LandscapeLeft:
+                        encodedOrientation = -90 + sensorOrientation;
+                        break;
+                    // Camera hardware shutter button down.
+                    case PageOrientation.LandscapeRight:
+                        encodedOrientation = 90 + sensorOrientation;
+                        break;
+                    // Camera hardware shutter button right.
+                    case PageOrientation.PortraitUp:
+                        encodedOrientation = 0 + sensorOrientation;
+                        break;
+                    // Camera hardware shutter button left.
+                    case PageOrientation.PortraitDown:
+                        encodedOrientation = 180 + sensorOrientation;
+                        break;
+                }
+                // Apply orientation to image encoding.
+                Camera.SetProperty(KnownCameraGeneralProperties.EncodeWithOrientation, encodedOrientation);
                 MemoryStream stream = new MemoryStream();
                 MemoryStream thumbStream = new MemoryStream();
                 var sequence = Camera.CreateCaptureSequence(1);
