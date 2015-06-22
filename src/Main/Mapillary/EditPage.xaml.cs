@@ -103,8 +103,8 @@ namespace Mapillary
             StorageFile file = image.File;
             m_selectedFile = file;
             m_selectedThumbFile = image.ThumbFile;
-            m_selectionIndex = viewModel.PhotoList.IndexOf(image) + 1;
-            imgNumText.Text = "Photo " + m_selectionIndex + " of " + viewModel.NumPhotos;
+            m_selectionIndex = viewModel.PhotoList.IndexOf(image);
+            imgNumText.Text = "Photo " + (m_selectionIndex + 1).ToString() + " of " + viewModel.NumPhotos;
             if (App.SaveToCameraRollEnabled)
             {
                 BitmapImage bitmap = GetBitmapFromMediaLib(image);
@@ -174,20 +174,28 @@ namespace Mapillary
                 var res = MessageBox.Show("Delete photo?", "Confirm delete", MessageBoxButton.OKCancel);
                 if (res == MessageBoxResult.OK)
                 {
+                    await m_selectedFile.DeleteAsync(StorageDeleteOption.PermanentDelete);
                     if (m_selectedThumbFile != null)
                     {
                         await m_selectedThumbFile.DeleteAsync(StorageDeleteOption.PermanentDelete);
-
                     }
 
-                    await m_selectedFile.DeleteAsync(StorageDeleteOption.PermanentDelete);
-                    viewModel.Remove(photoList.SelectedItem as Photo);
+                    viewModel.Remove(viewModel.PhotoList[m_selectionIndex] as Photo);
                     m_selectedFile = null;
+                    m_selectedThumbFile = null;
+                    photoList.SelectedItem = null;
                     UpdateNumPhotos();
+                    m_selectionIndex--;
+                    if (m_selectionIndex == viewModel.NumPhotos - 1 && viewModel.NumPhotos > 0)
+                    {
+                        m_selectionIndex--;
+                    }
+
+                    nextBtn_Click(this, null);
                 }
 
                 photoList.SelectedItem = null;
-                editPopup.IsOpen = false;
+                editPopup.IsOpen = viewModel.NumPhotos > 0;
 
             }
 
@@ -357,10 +365,10 @@ namespace Mapillary
 
         private void nextBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (m_selectionIndex > 0 && m_selectionIndex < viewModel.PhotoList.Count)
+            if (m_selectionIndex >= -1 && m_selectionIndex < (viewModel.PhotoList.Count-1))
             {
                 m_selectionIndex++;
-                Photo image = viewModel.PhotoList[m_selectionIndex-1];
+                Photo image = viewModel.PhotoList[m_selectionIndex];
                 OpenEditor(image);
             }
         }

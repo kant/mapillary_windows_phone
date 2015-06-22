@@ -138,6 +138,16 @@ namespace Mapillary
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            if (NavigationContext.QueryString.ContainsKey("op"))
+            {
+                string val = NavigationContext.QueryString["op"];
+                if (val == "login")
+                {
+                    ClearBackStack();
+                    NavigationContext.QueryString.Remove("op");
+                }
+            } 
+            
             SetLocationConsent(SettingsHelper.GetValue("LocationConsent", "false") == "true");
             CameraButtons.ShutterKeyHalfPressed += OnCameraButtonHalfPress;
             CameraButtons.ShutterKeyPressed += OnCameraButtonFullPress;
@@ -149,6 +159,13 @@ namespace Mapillary
             base.OnNavigatingFrom(e);
             CameraButtons.ShutterKeyHalfPressed -= OnCameraButtonHalfPress;
             CameraButtons.ShutterKeyPressed -= OnCameraButtonFullPress;
+        }
+
+        private void ClearBackStack()
+        {
+            while (NavigationService.RemoveBackEntry() != null)
+            {
+            }
         }
 
         public void UpdateLiveTile(int count)

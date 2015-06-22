@@ -154,22 +154,25 @@ namespace Mapillary
         private void SetupAccelorometer()
         {
             m_accelerometer = Accelerometer.GetDefault();
-            m_accelerometer.ReadingChanged += (s, e) => Dispatcher.BeginInvoke(() =>
-                            {
-                                var reading = m_accelerometer.GetCurrentReading();
-                                m_accReading = reading;
-                                m_angle = Math.Atan2(-reading.AccelerationX, reading.AccelerationY) * 180.0 / Math.PI;
-                                Microsoft.Phone.Controls.PageOrientation orientation = (App.Current.RootVisual as PhoneApplicationFrame).Orientation;
-                                if (!OrientationIsLandscape())
+            if (m_accelerometer != null)
+            {
+                m_accelerometer.ReadingChanged += (s, e) => Dispatcher.BeginInvoke(() =>
                                 {
-                                    landscapeMessageBorder.Visibility = Visibility.Visible;
-                                }
-                                else
-                                {
-                                    landscapeMessageBorder.Visibility = Visibility.Collapsed;
-                                }
+                                    var reading = m_accelerometer.GetCurrentReading();
+                                    m_accReading = reading;
+                                    m_angle = Math.Atan2(-reading.AccelerationX, reading.AccelerationY) * 180.0 / Math.PI;
+                                    Microsoft.Phone.Controls.PageOrientation orientation = (App.Current.RootVisual as PhoneApplicationFrame).Orientation;
+                                    if (!OrientationIsLandscape())
+                                    {
+                                        landscapeMessageBorder.Visibility = Visibility.Visible;
+                                    }
+                                    else
+                                    {
+                                        landscapeMessageBorder.Visibility = Visibility.Collapsed;
+                                    }
 
-                            });
+                                });
+            }
         }
 
         private void InitCompass()

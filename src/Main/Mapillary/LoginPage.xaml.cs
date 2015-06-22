@@ -37,6 +37,7 @@ namespace Mapillary
             await Login(email.Text.Trim(), password.Password);
         }
 
+ 
         private async Task Login(string email, string password)
         {
             try
@@ -51,7 +52,7 @@ namespace Mapillary
                 bool wasLoggedIn = await LoginService.Login(email, password);
                 if (wasLoggedIn)
                 {
-                    NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                    NavigationService.Navigate(new Uri("/MainPage.xaml?op=login", UriKind.Relative));
                 }
                 else
                 {
@@ -81,19 +82,23 @@ namespace Mapillary
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (e.NavigationMode == NavigationMode.Back && NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
-            }
+            ClearBackStack();
         }
 
+        private void ClearBackStack()
+        {
+            while (NavigationService.RemoveBackEntry() != null)
+            {
+            }
+        }
+        
         private async void TestUserBtn_Click(object sender, RoutedEventArgs e)
         {
             var result = await LoginService.LoginTestUser();
             if (result == true)
             {
                 MessageBox.Show("Logged in");
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/MainPage.xaml?op=login", UriKind.Relative));
             }
             else
             {

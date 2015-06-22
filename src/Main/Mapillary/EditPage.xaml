@@ -22,14 +22,14 @@
         <phone:JumpListItemForegroundConverter x:Key="ForegroundConverter"/>
 
         <DataTemplate x:Key="ItemTemplate1">
-            <StackPanel Height="150" Width="115" Margin="5">
+            <StackPanel Width="150" Height="113" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                 <Image Width="150" Height="113" Stretch="UniformToFill" Source="{Binding ThumbBitmapImage}">
                 </Image>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="ItemTemplate2">
-            <StackPanel Height="150" Width="115" Margin="5">
+            <StackPanel Width="150" Height="113" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                 <Image Width="150" Height="113" Source="{Binding ImageSource}" Stretch="UniformToFill">
                 </Image>
             </StackPanel>
@@ -99,7 +99,7 @@
                                         IsGroupingEnabled="false"
                                         SelectionChanged="photoList_SelectionChanged"
                                         LayoutMode="Grid"  
-                                        GridCellSize="150,113"/>
+                                        GridCellSize="155,120"/>
         </Grid>
         <c4f:ProgressOverlay Grid.RowSpan="3" x:Name="progress">
             <c4f:ProgressOverlay.Content>
