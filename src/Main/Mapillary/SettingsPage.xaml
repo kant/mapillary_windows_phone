@@ -56,8 +56,8 @@
                 <StackPanel>
                     <TextBlock Margin="12,12" Text="Riding mode capture interval (ms):" TextWrapping="Wrap" Foreground="#eeeeee" Style="{StaticResource PhoneTextNormalStyle}"/>
                     <StackPanel Margin="10,0" Orientation="Horizontal">
-                        <Slider x:Name="intervalSlider" Foreground="White" Minimum="1000" SmallChange="100" LargeChange="1000" Maximum="10000" Width="370" ValueChanged="intervalSlider_ValueChanged" />
-                        <TextBlock x:Name="intervalValue" FontFamily="Arial" Margin="5,16" Text="10000" Foreground="#eeeeee" FontSize="18" />
+                        <Slider x:Name="intervalSlider" Foreground="White" Minimum="2000" SmallChange="100" LargeChange="1000" Maximum="6000" Width="370" ValueChanged="intervalSlider_ValueChanged" />
+                        <TextBlock x:Name="intervalValue" FontFamily="Arial" Margin="5,16" Text="2000" Foreground="#eeeeee" FontSize="18" />
                     </StackPanel>
                     <CheckBox BorderBrush="White" x:Name="shutterSoundChk" Foreground="White" Margin="12,8,12,8" Content="Camera shutter sound on" Unchecked="shutterSoundChk_Checked" Checked="shutterSoundChk_Checked" Style="{StaticResource CheckBoxStyle1}"/>
                     <CheckBox BorderBrush="White" x:Name="storePhotosInCameraRollChk" Foreground="White" Margin="12,8,12,8" Unchecked="storePhotosInCameraRollChk_Checked"  Checked="storePhotosInCameraRollChk_Checked" Style="{StaticResource CheckBoxStyle1}">

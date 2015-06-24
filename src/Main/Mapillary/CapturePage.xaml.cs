@@ -70,12 +70,12 @@ namespace Mapillary
 #endif
         }
 
-        private async void SequenceTimer_Tick(object sender, EventArgs e)
+        private bool m_slowMessageShown;
+        private double m_currentSpeed;
+
+        private bool IsMoving()
         {
-            CheckAvailableMem();
-            flashBorder.Color = Colors.White;
-            await CapturePhoto();
-            flashBorder.Color = Color.FromArgb(0, 0, 0, 0);
+            return m_currentSpeed >=2.79; // 10 km/h
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -282,16 +282,9 @@ namespace Mapillary
         {
             m_currentposition = e.Position.Location;
             m_calculatedHeading = e.Position.Location.Course;
+            m_currentSpeed = e.Position.Location.Speed;
 #if DEBUG
-            currentPosText.Text = "Current pos: " + m_currentposition.Latitude + " / " + m_currentposition.Longitude + " / " + m_currentposition.Speed + " / " + m_currentposition.HorizontalAccuracy;
-            if (m_compassReading != null)
-            {
-                currentPosText.Text += " / " + Adjust90(m_compassReading.HeadingMagneticNorth) + " (" + Math.Round(m_calculatedHeading, 0).ToString() + "°)";
-            }
-            else
-            {
-                currentPosText.Text += " / " + " (" + Math.Round(m_calculatedHeading, 0).ToString() + "°)";
-            }
+            currentPosText.Text = "Speed " + m_currentSpeed.ToString();
 #endif
             double accuracy = m_currentposition.HorizontalAccuracy;
             if (m_compass == null)
@@ -759,6 +752,7 @@ namespace Mapillary
 
         private async void cameraButton_Click(object sender, RoutedEventArgs e)
         {
+            m_slowMessageShown = false;
             if (!m_canTakePicture)
             {
                 return;
@@ -772,9 +766,6 @@ namespace Mapillary
 
             if (m_captureMode == CaptureMode.Sequence && !m_sequenceIsStarted)
             {
-                flashBorder.Color = Colors.White;
-                await CapturePhoto();
-                flashBorder.Color = Color.FromArgb(0, 0, 0, 0);
                 StartSequence();
             }
 
@@ -783,9 +774,22 @@ namespace Mapillary
                 while (m_sequenceIsStarted)
                 {
                     await Task.Delay(App.CaptureInterval);
-                    flashBorder.Color = Colors.White;
-                    await CapturePhoto();
-                    flashBorder.Color = Color.FromArgb(0, 0, 0, 0);
+                    CheckAvailableMem();
+                    if (IsMoving())
+                    {
+                        m_slowMessageShown = false;
+                        flashBorder.Color = Colors.White;
+                        await CapturePhoto();
+                        flashBorder.Color = Color.FromArgb(0, 0, 0, 0);
+                    }
+                    else
+                    {
+                        if (!m_slowMessageShown)
+                        {
+                            ShowMessage("Move faster to take pictures");
+                            m_slowMessageShown = true;
+                        }
+                    }
                 }
             }
             else
@@ -796,6 +800,7 @@ namespace Mapillary
 
         private async Task StartCapture()
         {
+            m_slowMessageShown = false;
 
             CheckAvailableMem();
             CheckBattery();
@@ -819,6 +824,7 @@ namespace Mapillary
         private void StartSequence()
         {
             m_sequenceIsStarted = true;
+            m_currentSpeed = 0;
             cameraButton.Background = new SolidColorBrush(Color.FromArgb(0x66, 0xff, 0, 0)); //red
         }
 
