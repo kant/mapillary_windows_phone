@@ -16,6 +16,7 @@ namespace Mapillary
 {
     public partial class LoginPage : PhoneApplicationPage
     {
+        ProgressIndicator progress;
         public LoginPage()
         {
             InitializeComponent();
@@ -24,6 +25,13 @@ namespace Mapillary
             TestUserBtn.Visibility = Visibility.Visible;
 #endif
             App.FeedLastRefreshed = DateTime.MinValue;
+            progress = new ProgressIndicator
+            {
+                IsVisible = false,
+                IsIndeterminate = false,
+            };
+
+            SystemTray.SetProgressIndicator(this, progress);
         }
 
         private async void loginButton_Click(object sender, RoutedEventArgs e)
@@ -34,7 +42,13 @@ namespace Mapillary
                 return;
             }
 
+            progress.IsVisible = true;
+            progress.IsIndeterminate = true;
+            SystemTray.SetIsVisible(this, true);
+            SystemTray.SetOpacity(this, 0);
             await Login(email.Text.Trim(), password.Password);
+            SystemTray.SetIsVisible(this, false);
+            progress.IsVisible = false;
         }
 
  
@@ -56,11 +70,15 @@ namespace Mapillary
                 }
                 else
                 {
+                    SystemTray.SetIsVisible(this, false);
+                    progress.IsVisible = false;
                     MessageBox.Show("E-mail or password is wrong. Please try again.", "Login failed", MessageBoxButton.OK);
                 }
             }
             catch (Exception)
             {
+                SystemTray.SetIsVisible(this, false);
+                progress.IsVisible = false;
                 MessageBox.Show("An error occurred while trying to login. Please try again.", "Login failed", MessageBoxButton.OK);
             }
 

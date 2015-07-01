@@ -349,6 +349,7 @@ namespace Mapillary
             ShowHideList(App.EventListCache != null && App.EventListCache.Count > 0);
             SystemTray.SetIsVisible(this, false);
             progress.IsVisible = false;
+
         }
 
         private async Task GenerateTestImages()
