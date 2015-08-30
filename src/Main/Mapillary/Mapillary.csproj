@@ -100,11 +100,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditPageSequences.xaml.cs">
+      <DependentUpon>EditPageSequences.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FeedItem.cs" />
     <Compile Include="Header.xaml.cs">
       <DependentUpon>Header.xaml</DependentUpon>
     </Compile>
     <Compile Include="Keys.cs" />
+    <Compile Include="Models\Sequence.cs" />
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -160,6 +164,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="CapturePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EditPageSequences.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -220,6 +228,7 @@
     <Content Include="Assets\appbar.delete.png" />
     <Content Include="Assets\appbar.home.png" />
     <Content Include="Assets\appbar.image.png" />
+    <Content Include="Assets\appbar.man.walkauto.png" />
     <Content Include="Assets\appbar.map.png" />
     <Content Include="Assets\appbar.page.copy.png" />
     <Content Include="Assets\appbar.people.profile.png" />

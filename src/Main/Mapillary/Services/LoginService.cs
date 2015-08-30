@@ -96,6 +96,7 @@ namespace Mapillary.Services
                 }
                 else
                 {
+                    var responseString = await response.Content.ReadAsStringAsync();
                     httpClient.Dispose();
                     return null;
                 }

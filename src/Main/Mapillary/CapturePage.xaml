@@ -97,19 +97,23 @@
             <c4f:RoundButton x:Name="addButton" Margin="15,20" Foreground="White" BorderBrush="White" ButtonHeight="100" ButtonWidth="100" Click="newSequenceButton_Click" ImageSource="/Assets/appbar.add.png"/>
             <c4f:RoundButton x:Name="cameraButton" Background="#66ff0000" Margin="15,20" Foreground="White" BorderBrush="White" ButtonHeight="100" ButtonWidth="100" Click="cameraButton_Click" ImageSource="/Assets/appbar.camera.png"/>
             <c4f:RoundButton x:Name="modeButton" Margin="15,20" Foreground="White" BorderBrush="White" ButtonHeight="100" ButtonWidth="100" Click="modeButton_Click" ImageSource="/Assets/appbar.image.landscape.png"/>
-            <Popup x:Name="modePopup" HorizontalOffset="-350" VerticalOffset="-220">
+            <Popup x:Name="modePopup" HorizontalOffset="-350" VerticalOffset="-250">
                 <Popup.RenderTransform>
-                    <RotateTransform x:Name="modePopupTransform" CenterX="-185" CenterY="-185" Angle="-90" />
+                    <RotateTransform x:Name="modePopupTransform" CenterX="-205" CenterY="-126" Angle="-90" />
                 </Popup.RenderTransform>
-                <Border Width="350" Height="220" Background="#242528">
+                <Border Width="350" Height="310" Background="#242528">
                     <StackPanel Margin="10,3">
                         <StackPanel Orientation="Horizontal">
                             <Image x:Name="singleModeButton" Margin="0" Height="70" Width="70" Source="/Assets/appbar.man.walk.png" Tap="singleModeButton_Tap"/>
-                            <TextBlock Foreground="#eeeeee" Margin="4,14"  FontSize="22" Text="Take pictures (walking)" Tap="singleModeButton_Tap"/>
+                            <TextBlock Foreground="#eeeeee" Margin="4,14"  FontSize="22" Text="Walking" Tap="singleModeButton_Tap"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="walkAutoModeButton" Margin="0" Height="70" Width="70" Source="/Assets/appbar.man.walkauto.png" Tap="singleModeButton_Tap"/>
+                            <TextBlock Foreground="#eeeeee" Margin="4,14"  FontSize="22" Text="Walking auto" Tap="walkingAutoModeButton_Tap"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Image x:Name="sequenceModeButton" Margin="0" Height="70" Width="70" Source="/Assets/appbar.transit.car.png" Tap="sequenceModeButton_Tap"/>
-                            <TextBlock Foreground="#eeeeee" Margin="4,14"  FontSize="22" Text="Take pictures (riding)" Tap="sequenceModeButton_Tap"/>
+                            <TextBlock Foreground="#eeeeee" Margin="4,14"  FontSize="22" Text="Riding" Tap="sequenceModeButton_Tap"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Image x:Name="panoramaModeButton" Margin="0" Height="70" Width="70" Source="/Assets/appbar.image.landscape.png" Tap="panoramaModeButton_Tap"/>

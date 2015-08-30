@@ -34,7 +34,7 @@ using Windows.Storage;
 
 namespace Mapillary
 {
-    public enum CaptureMode { Panorama = 0, Single = 1, Sequence = 2 };
+    public enum CaptureMode { Panorama = 0, Single = 1, Sequence = 2, WalkAuto = 3 };
     public partial class CapturePage : PhoneApplicationPage
     {
         private VideoBrush viewfinderBrush;
@@ -75,7 +75,10 @@ namespace Mapillary
 
         private bool IsMoving()
         {
-            return m_currentSpeed >=2.79; // 10 km/h
+            if (m_captureMode == CaptureMode.Sequence)
+                return m_currentSpeed >= 2.79; // 10 km/h
+            else
+                return true;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -143,6 +146,10 @@ namespace Mapillary
                 modeButton.ImageSource = new BitmapImage(new Uri(@"/Assets/appbar.transit.car.png", UriKind.Relative));
             }
 
+            if (m_captureMode == CaptureMode.WalkAuto)
+            {
+                modeButton.ImageSource = new BitmapImage(new Uri(@"/Assets/appbar.man.walkauto.png", UriKind.Relative));
+            }
 
             if (m_captureMode == CaptureMode.Panorama)
             {
@@ -574,7 +581,7 @@ namespace Mapillary
 
         private void SaveImageToCameraRoll(Stream stream, MemoryStream thumbStream)
         {
-            string fileName = DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss_fff");
+            string fileName = DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss_fff") + "#" + m_sequenceGuid.ToString() ;
             ExifFile exif = ExifFile.ReadStream(stream);
             string metadata = GetMetadata(fileName);
             byte[] data = Encoding.UTF8.GetBytes(metadata);
@@ -605,7 +612,7 @@ namespace Mapillary
 
         private void SaveImageToIsoStore(Stream stream, MemoryStream thumbStream)
         {
-            string fileName = DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss_fff");
+            string fileName = DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss_fff") + "#" + m_sequenceGuid.ToString();
             ExifFile exif = ExifFile.ReadStream(stream);
             string metadata = GetMetadata(fileName);
             byte[] data = Encoding.UTF8.GetBytes(metadata);
@@ -764,16 +771,33 @@ namespace Mapillary
                 return;
             }
 
+            if (m_captureMode == CaptureMode.WalkAuto && (m_sequenceIsStarted || m_lowaccuracy))
+            {
+                StopSequence();
+                return;
+            }
+
             if (m_captureMode == CaptureMode.Sequence && !m_sequenceIsStarted)
             {
                 StartSequence();
             }
 
-            if (m_captureMode == CaptureMode.Sequence)
+            if (m_captureMode == CaptureMode.WalkAuto && !m_sequenceIsStarted)
+            {
+                StartSequence();
+            }
+
+            if (m_captureMode == CaptureMode.Sequence || m_captureMode == CaptureMode.WalkAuto)
             {
                 while (m_sequenceIsStarted)
                 {
-                    await Task.Delay(App.CaptureInterval);
+                    int waitInterval = App.CaptureInterval;
+                    if (m_captureMode == CaptureMode.WalkAuto)
+                    {
+                        waitInterval = 5000;
+                    }
+
+                    await Task.Delay(waitInterval);
                     CheckAvailableMem();
                     if (IsMoving())
                     {
@@ -839,10 +863,20 @@ namespace Mapillary
             NewSequence();
         }
 
+        private void walkingAutoModeButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            modePopup.IsOpen = false;
+            if (m_captureMode == CaptureMode.WalkAuto) return;
+            if (m_captureMode != CaptureMode.Sequence) StopSequence();
+            SetCaptureMode(CaptureMode.WalkAuto);
+            ShowMessage("Changing mode to walking auto");
+            NewSequence();
+        }
         private void sequenceModeButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             modePopup.IsOpen = false;
             if (m_captureMode == CaptureMode.Sequence) return;
+            if (m_captureMode != CaptureMode.Sequence) StopSequence();
             ShowMessage("Changing mode to riding");
             SetCaptureMode(CaptureMode.Sequence);
             NewSequence();

@@ -64,7 +64,7 @@ namespace Mapillary
         {
             m_selectedFile = null;
             viewModel = new PhotosViewModel();
-            await viewModel.GetPhotos();
+            await viewModel.GetPhotos(App.SelectedSequence.SequenceId);
 
             noPhotos.Visibility = viewModel.NumPhotos > 0 ? Visibility.Collapsed : Visibility.Visible;
             UpdateNumPhotos();
@@ -74,6 +74,42 @@ namespace Mapillary
         private void UpdateNumPhotos()
         {
             titleCount.Text = viewModel.NumPhotos + "  photos waiting for upload";
+        }
+
+        private async Task DeleteSequence(Sequence sequenceToDelete)
+        {
+            progessText.Text = "Deleting...";
+            progress.Show();
+            await viewModel.GetPhotos(App.SelectedSequence.SequenceId);
+            foreach (var photo in viewModel.PhotoList)
+            {
+                try
+                {
+                    bool seqFilter = photo.Title.EndsWith(sequenceToDelete.SequenceId);
+                    if (sequenceToDelete.SequenceId == "noseq")
+                        seqFilter = true;
+                    if (photo.ThumbFile != null && seqFilter)
+                    {
+                        await photo.ThumbFile.DeleteAsync(StorageDeleteOption.PermanentDelete);
+                    }
+
+                    if (photo.File != null && seqFilter)
+                    {
+                        await photo.File.DeleteAsync(StorageDeleteOption.PermanentDelete);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unable to delete: " + ex.Message + ". Continuing..", "Delete failed", MessageBoxButton.OK);
+                }
+
+            }
+
+            viewModel.PhotoList.Clear();
+            m_selectedFile = null;
+            m_selectedThumbFile = null;
+            UpdateNumPhotos();
+            progress.Hide();
         }
 
         private void photoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -375,10 +411,11 @@ namespace Mapillary
 
         private async void deleteButton_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("Are you sure you want to delete all the photos? This cannot be undone!", "Delete photos", MessageBoxButton.OKCancel);
+            var result = MessageBox.Show("Are you sure you want to delete all the photos in this sequence? This cannot be undone!", "Delete photos", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
             {
-                await DeleteAllPhotos();
+                await DeleteSequence(App.SelectedSequence);
+                if (NavigationService.CanGoBack) NavigationService.GoBack();
             }
         }
 

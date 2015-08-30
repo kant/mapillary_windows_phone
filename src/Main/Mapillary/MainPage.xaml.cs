@@ -249,7 +249,7 @@ namespace Mapillary
             //await GenerateTestImages();
 
             int count = await UpdateCounter();
-            UpdateLiveTile(count);
+            var btn = ApplicationBar.Buttons[0];
             var success = await LoginService.RefreshTokens();
         }
 
@@ -486,7 +486,7 @@ namespace Mapillary
 
         private void uploadButton_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/EditPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/EditPageSequences.xaml", UriKind.Relative));
         }
 
         private bool CheckLocationConsent()

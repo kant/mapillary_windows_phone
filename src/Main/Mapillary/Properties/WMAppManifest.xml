@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{a93eb3df-8c2e-4487-b906-232389718b1a}" Title="Mapillary" RuntimeType="Silverlight" Version="1.1.1.0" Genre="apps.normal" Author="Ovesen.net" Description="Mapillary is a service for sharing photos for mapping." Publisher="Ovesen.net" PublisherID="{9fb39e66-3484-402c-9cda-c22cc1905eb3}">
+  <App xmlns="" ProductID="{a93eb3df-8c2e-4487-b906-232389718b1a}" Title="Mapillary" RuntimeType="Silverlight" Version="1.2.0.0" Genre="apps.normal" Author="Ovesen.net" Description="Mapillary is a service for sharing photos for mapping." Publisher="Ovesen.net" PublisherID="{9fb39e66-3484-402c-9cda-c22cc1905eb3}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

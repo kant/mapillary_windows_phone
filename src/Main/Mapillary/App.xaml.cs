@@ -10,6 +10,7 @@ using Mapillary.Resources;
 using Mapillary.Services;
 using System.Device.Location;
 using System.Collections.Generic;
+using Mapillary.Models;
 
 namespace Mapillary
 {
@@ -193,6 +194,8 @@ namespace Mapillary
                 m_geoWatcher = value;
             }
         }
+
+        public static Sequence SelectedSequence { get; internal set; }
 
         private void InitializePhoneApplication()
         {

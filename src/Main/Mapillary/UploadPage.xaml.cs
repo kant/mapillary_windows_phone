@@ -98,7 +98,15 @@ namespace Mapillary
             try
             {
                 m_viewModel = new PhotosViewModel();
-                await m_viewModel.GetPhotos();
+                if (App.SelectedSequence != null)
+                {
+                    await m_viewModel.GetPhotos(App.SelectedSequence.SequenceId);
+                }
+                else
+                {
+                    await m_viewModel.GetPhotos();
+                }
+
                 DataContext = m_viewModel;
 
                 noPhotos.Visibility = m_viewModel.NumPhotos > 0 ? Visibility.Collapsed : Visibility.Visible;
