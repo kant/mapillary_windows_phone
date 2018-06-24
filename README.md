@@ -9,4 +9,4 @@ For more information on Mapillary, see [mapillary.com](https://www.mapillary.com
 Please file any Windows Phone specific issues or bugs [directly in this repository](https://github.com/mapillary/mapillary_windows_phone/issues). 
 
 ### License
-Developed in the open under a BSD license. 
+Developed in the open source under a BSD license. 
